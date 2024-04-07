@@ -7,6 +7,7 @@ export default function LangAI() {
   const [response, setResponse] = useState({});
   const [sentence, setSentence] = useState("");
   const [inputDisplay, setInputDisplay] = useState(false);
+  console.log(process.env);
   const fetchData = async () => {
     try {
       const result = await axios.post(
