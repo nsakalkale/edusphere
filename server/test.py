@@ -14,6 +14,11 @@ CORS(app)
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 
+@app.route("/")
+def home():
+    return "IT'S HOME!!!"
+
+
 @app.route('/langai', methods=['POST'])
 def get_message():
     data = request.get_json()
@@ -54,7 +59,7 @@ def get_message():
         response = jsonify(
             {'structure': response_script_first, 'correct': response_title_first})
         response.headers.add('Access-Control-Allow-Origin',
-                             'https://edusphere-insignia.vercel.app')
+                             'http://localhost:3000')
         return response
     else:
         return jsonify({'error': 'sentence not provided'}), 400
