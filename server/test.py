@@ -9,7 +9,8 @@ import dotenv
 dotenv.load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+     r"/langai": {"origins": "https://edusphere-insignia.vercel.app"}})
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
