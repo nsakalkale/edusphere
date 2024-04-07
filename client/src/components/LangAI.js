@@ -11,7 +11,7 @@ export default function LangAI() {
   const fetchData = async () => {
     try {
       const result = await axios.post(
-        process.env.REACT_APP_PYTHON_BACKEND_LLM_URL,
+        "https://edusphere-python-backend.vercel.app/langai",
         {
           sentence: sentence,
         }
