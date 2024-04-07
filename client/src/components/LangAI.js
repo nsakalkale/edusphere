@@ -8,9 +8,9 @@ export default function LangAI() {
   const [sentence, setSentence] = useState("");
   const [inputDisplay, setInputDisplay] = useState(false);
   console.log(process.env);
-  const fetchData = async () => {
+  function fetchData() {
     try {
-      const result = await axios.post(
+      const result = axios.post(
         "https://edusphere-python-backend.vercel.app/langai",
         {
           sentence: sentence,
@@ -20,9 +20,8 @@ export default function LangAI() {
       setInputDisplay(true);
     } catch (error) {
       console.error("Error:", error);
-      // Display error message to the user
     }
-  };
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
