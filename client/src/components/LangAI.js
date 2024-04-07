@@ -9,18 +9,19 @@ export default function LangAI() {
   const [inputDisplay, setInputDisplay] = useState(false);
   console.log(process.env);
   function fetchData() {
-    try {
-      const result = axios.post(
-        "https://edusphere-python-backend.vercel.app/langai",
-        {
-          sentence: sentence,
-        }
-      );
-      setResponse(result.data);
-      setInputDisplay(true);
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    axios
+      .post(process.env.REACT_APP_PYTHON_BACKEND_LLM_URL, {
+        sentence: sentence,
+      })
+      .then((response) => {
+        // Handle successful response
+        setResponse(response.data);
+        setInputDisplay(true);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error:", error);
+      });
   }
 
   const handleSubmit = (event) => {
