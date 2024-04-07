@@ -7,16 +7,19 @@ export default function LangAI() {
   const [response, setResponse] = useState({});
   const [sentence, setSentence] = useState("");
   const [inputDisplay, setInputDisplay] = useState(false);
-
   const fetchData = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/langai", {
-        sentence: sentence,
-      });
-      setResponse(response.data);
+      const result = await axios.post(
+        process.env.REACT_APP_PYTHON_BACKEND_LLM_URL,
+        {
+          sentence: sentence,
+        }
+      );
+      setResponse(result.data);
       setInputDisplay(true);
     } catch (error) {
       console.error("Error:", error);
+      // Display error message to the user
     }
   };
 
@@ -37,12 +40,14 @@ export default function LangAI() {
 
   return (
     <>
-      <title>LangAI</title>
+      <head>
+        <title>LangAI</title>
+      </head>
       <Navbar />
       <div className="container poppins">
-        <div className="mt-2 bg-white shadow-sm p-5 rounded mx-auto w-xl-50 w-sm-100">
-          <div className="">
-            <p style={{ fontSize: "250%", fontWeight: "900" }}>
+        <header className="mt-2 bg-white shadow-sm p-5 rounded mx-auto w-xl-50 w-sm-100">
+          <div>
+            <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
               📕Smart Language Learning System
             </p>
           </div>
@@ -62,17 +67,17 @@ export default function LangAI() {
           <br />
           <br />
           <div className={`answer-box ${inputDisplay ? "d-block" : "d-none"}`}>
-            <p style={{ fontSize: "200%", fontWeight: "900" }}>
+            <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
               Correct Paragraph:
             </p>
             <h6>{response.correct}</h6>
             <br />
-            <p style={{ fontSize: "200%", fontWeight: "900" }}>
+            <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
               Sentence Structure Analysis:
             </p>
             <h6>{response.structure}</h6>
           </div>
-        </div>
+        </header>
         <br />
       </div>
       <Footer />
