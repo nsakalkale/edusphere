@@ -9,8 +9,7 @@ import dotenv
 dotenv.load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={
-     r"/langai": {"origins": "https://edusphere-insignia.vercel.app"}})
+CORS(app)
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
@@ -52,7 +51,11 @@ def get_message():
         title=response_title_first)
 
     if sentence:
-        return jsonify({'structure': response_script_first, 'correct': response_title_first})
+        response = jsonify(
+            {'structure': response_script_first, 'correct': response_title_first})
+        response.headers.add('Access-Control-Allow-Origin',
+                             'https://edusphere-insignia.vercel.app')
+        return response
     else:
         return jsonify({'error': 'sentence not provided'}), 400
 
