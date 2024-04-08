@@ -1,6 +1,5 @@
-Flask
-Flask_Cors
-langchain
+flask
+flask_cors
 langchain_community
-python-dotenv
-pypwin32
+langchain
+dotenv
