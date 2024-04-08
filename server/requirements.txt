@@ -3,3 +3,4 @@ Flask_Cors
 langchain
 langchain_community
 python-dotenv
+pypwin32
