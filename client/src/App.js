@@ -18,7 +18,7 @@ function App() {
   // });
   // document.addEventListener("contextmenu", (event) => event.preventDefault());
   return (
-    <div className="bg-light vh-100 ">
+    <div className="bg-light ">
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
