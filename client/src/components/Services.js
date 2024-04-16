@@ -12,12 +12,12 @@ export default function Services() {
     <>
       <title>Services</title>
       <Navbar />
-      <div className="container-fluid poppins">
+      <div className="container-fluid poppins ">
         <div className="mt-1 big-title p-4">
           <span>Let's Go !!</span>
         </div>
-        <div className="row">
-          <div className="col-sm-12 bg-white  rounded">
+        <div className="row bg-white rounded">
+          <div className="col-sm-12">
             <div className="p-4">
               <div className="row">
                 <div className="col-sm-6">
@@ -61,9 +61,9 @@ export default function Services() {
             </div>
           </div>
         </div>
-        <div className="p-4">
+        <div className="p-4 mt-4 bg-light">
           <div className="row">
-            <div className="col-sm-6 mt-5">
+            <div className="col-sm-6">
               <h2>
                 <img src={langai} width={50} alt="Mentor" />
                 &nbsp; <b>"LangAI: Personal Language Mentor"</b>
@@ -85,7 +85,7 @@ export default function Services() {
             </div>
 
             <div className="col-sm-6">
-              <img src={gif_langai} className="w-100" />
+              <img src={gif_langai} className="w-100 rounded" />
             </div>
           </div>
         </div>
