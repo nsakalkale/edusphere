@@ -55,7 +55,7 @@ export default function OurTeam() {
                       Nimish Sakalkale
                     </div>
                     <div className="text-muted text-center">
-                      DevOps & Web Dev
+                      DevOps | FrontEnd | BackEnd
                     </div>
                   </div>
                 </div>
