@@ -22,9 +22,9 @@ export default function Navbar() {
           <NavLink to="/services" className="me-xl-5 me-sm-3 me-4">
             <img src={about} width={25} alt="About" />
           </NavLink>
-          {/* <NavLink to="/ourteam" className="me-xl-5 me-sm-3 me-4">
+          <NavLink to="/ourteam" className="me-xl-5 me-sm-3 me-4">
             <img src={ourteam} width={25} alt="Our Team" />
-          </NavLink> */}
+          </NavLink>
         </div>
       </div>
     </div>
