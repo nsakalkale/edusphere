@@ -9,10 +9,9 @@ import dotenv
 dotenv.load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/langai": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/langai": {"origins": "*"}})
 
-# os.getenv("OPENAI_API_KEY")
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 
 @app.route("/")
