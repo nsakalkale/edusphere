@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "../essentials/Navbar";
 import Footer from "../essentials/Footer";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import { Helmet } from "react-helmet";
+import "react-toastify/dist/ReactToastify.css";
+import LoadingBar from "react-top-loading-bar";
 
 export default function LangAI() {
   const [response, setResponse] = useState({});
   const [sentence, setSentence] = useState("");
   const [inputDisplay, setInputDisplay] = useState(false);
-  console.log(process.env);
-  function fetchData() {
+  const [isLoading, setIsLoading] = useState(false);
+  const loadingBar = useRef(null);
+
+  const fetchData = () => {
+    loadingBar.current.continuousStart();
+    setIsLoading(true);
     axios
-      .post(process.env.REACT_APP_PYTHON_BACKEND_LLM_URL, {
-        sentence: sentence,
-      })
+      .post(
+        process.env.REACT_APP_PYTHON_BACKEND_LLM_URL,
+        { sentence: sentence },
+        { headers: { "Content-Type": "application/json" } }
+      )
       .then((response) => {
-        // Handle successful response
         setResponse(response.data);
         setInputDisplay(true);
       })
       .catch((error) => {
-        // Handle error
-        console.error("Error:", error);
+        toast.error("API Key Expired!", {
+          position: "top-right",
+          theme: "dark",
+        });
+      })
+      .finally(() => {
+        setIsLoading(false);
+        loadingBar.current.complete();
       });
-  }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,9 +56,10 @@ export default function LangAI() {
 
   return (
     <>
-      <head>
+      <Helmet>
         <title>LangAI</title>
-      </head>
+      </Helmet>
+      <LoadingBar color="#00C8B1" height={4} shadow={true} ref={loadingBar} />
       <Navbar />
       <div className="container poppins">
         <header className="mt-2 bg-white shadow-sm p-5 rounded mx-auto w-xl-50 w-sm-100">
@@ -64,10 +80,15 @@ export default function LangAI() {
             onKeyDown={handleKeyPress}
             placeholder=""
             autoComplete="off"
+            disabled={isLoading}
           />
           <br />
           <br />
-          <div className={`answer-box ${inputDisplay ? "d-block" : "d-none"}`}>
+          <div
+            className={`answer-box ${
+              inputDisplay && !isLoading ? "d-block" : "d-none"
+            }`}
+          >
             <p style={{ fontSize: "2rem", fontWeight: "bold" }}>
               Correct Paragraph:
             </p>
@@ -81,7 +102,9 @@ export default function LangAI() {
         </header>
         <br />
       </div>
+
       <Footer />
+      <ToastContainer />
     </>
   );
 }
