@@ -3,4 +3,4 @@ Flask_Cors==4.0.0
 langchain_community==0.2.6
 pyttsx3==2.90
 streamlit==1.32.2
-dotenv
+python-dotenv
