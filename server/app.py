@@ -62,7 +62,3 @@ def get_message():
     except Exception as e:
         app.logger.error(f"An error occurred: {str(e)}")
         return jsonify({'error': str(e)}), 500
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
